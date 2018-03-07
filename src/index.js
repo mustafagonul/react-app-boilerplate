@@ -1,10 +1,26 @@
 import React from 'react';
 import { render } from 'react-dom';
-// import ReactDOM from 'react-dom';
-import './index.css';
+import { Provider } from 'react-redux';
+import { fromJS } from 'immutable';
+
+import configureStore from './store/configureStore';
 import App from './containers/App/App';
-import registerServiceWorker from './registerServiceWorker';
 
-render(<App />, document.getElementById('root'));
+import 'normalize.css';
+import './style.css';
 
-registerServiceWorker();
+const language = localStorage.getItem('language');
+
+const store = configureStore({
+	settings: fromJS({
+		language
+	})
+}); 
+
+render(
+	<Provider store={store}>
+		<App />
+	</Provider>,
+	document.getElementById('root')
+);
+
