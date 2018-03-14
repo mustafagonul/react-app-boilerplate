@@ -4,6 +4,7 @@ import { BrowserRouter as Router,  Route,  Link } from 'react-router-dom';
 import { getTranslate, getActiveLanguage } from 'react-localize-redux';
 import Button from 'material-ui/Button';
 
+import MenuListComposition from '../../components/MenuListComposition/MenuListComposition';
 import Home from '../Home/Home';
 import Info from '../Info/Info';
 import About from '../About/About';
@@ -34,6 +35,8 @@ class App extends Component {
           <Button onClick={ this.selectTurkish }>
             { translate('TURKISH') }
           </Button>
+          <MenuListComposition />
+
 
           <hr/>
 
