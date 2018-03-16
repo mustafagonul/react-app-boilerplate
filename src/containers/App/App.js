@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { BrowserRouter as Router,  Route,  Link } from 'react-router-dom';
 import { getTranslate, getActiveLanguage } from 'react-localize-redux';
-import Button from 'material-ui/Button';
 
 import MenuListComposition from '../../components/MenuListComposition/MenuListComposition';
+import LanguageButton from '../../components/LanguageButton/LanguageButton';
 import Home from '../Home/Home';
 import Info from '../Info/Info';
 import About from '../About/About';
@@ -29,12 +29,9 @@ class App extends Component {
     return (
       <Router>
         <div>
-          <Button onClick={ this.selectEnglish }>
-            { translate('ENGLISH') }
-          </Button>
-          <Button onClick={ this.selectTurkish }>
-            { translate('TURKISH') }
-          </Button>
+          <LanguageButton code="GB" text='ENGLISH' onClick={ this.selectEnglish } />
+          <LanguageButton code="TR" text='TURKISH' onClick={ this.selectTurkish } />
+
           <MenuListComposition />
 
 
