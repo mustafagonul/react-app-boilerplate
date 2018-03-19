@@ -3,12 +3,11 @@ import { connect } from 'react-redux';
 import { BrowserRouter as Router,  Route,  Link } from 'react-router-dom';
 import { getTranslate, getActiveLanguage } from 'react-localize-redux';
 
+import LanguageSelect from '../../containers/LanguageSelect/LanguageSelect'
 import MenuListComposition from '../../components/MenuListComposition/MenuListComposition';
-import LanguageButton from '../../components/LanguageButton/LanguageButton';
 import Home from '../Home/Home';
 import Info from '../Info/Info';
 import About from '../About/About';
-import { requestSelectEnglish, requestSelectTurkish } from '../../actions/language';
 
 
 import logo from './logo.svg';
@@ -16,12 +15,6 @@ import './App.css';
 
 
 class App extends Component {
-  selectEnglish = () => {
-    this.props.dispatch(requestSelectEnglish());
-  }
-  selectTurkish = () => {
-    this.props.dispatch(requestSelectTurkish());
-  }
 
   render() {
     const { translate, currentLanguage } = this.props;
@@ -29,9 +22,7 @@ class App extends Component {
     return (
       <Router>
         <div>
-          <LanguageButton code="GB" text='ENGLISH' onClick={ this.selectEnglish } />
-          <LanguageButton code="TR" text='TURKISH' onClick={ this.selectTurkish } />
-
+          <LanguageSelect />
           <MenuListComposition />
 
 
