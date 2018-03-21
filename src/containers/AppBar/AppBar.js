@@ -9,26 +9,21 @@ import Typography from 'material-ui/Typography';
 import Button from 'material-ui/Button';
 
 import LanguageSelect from '../LanguageSelect/LanguageSelect';
+import AppBarButton from '../../components/AppBarButton/AppBarButton';
 
 
 class AppBar extends Component {
 
-
- 
 	render() {
     const { translate, currentLanguage } = this.props;
-
-		const onHome = props => <Link to='/' {...props} />
-		const onInfo = props => <Link to='/info' {...props} />
-		const onAbout = props => <Link to='/about' {...props} />
 
     return (
 			<div>
 				<MuiAppBar position="static">
 					<Toolbar>
-						<Button component={ onHome }><Typography variant="subheading">{ translate('Home') }</Typography></Button>
-						<Button component={ onInfo }><Typography variant="subheading">{ translate('Info') }</Typography></Button>
-						<Button component={ onAbout }><Typography variant="subheading">{ translate('About') }</Typography></Button>
+						<AppBarButton text='Home' link='/' />
+						<AppBarButton text='Info' link='/info' />
+						<AppBarButton text='About' link='/about' />
 						<LanguageSelect />
 					</Toolbar>
 				</MuiAppBar>	
@@ -42,6 +37,7 @@ const mapStateToProps = state => ({
   translate: getTranslate(state.locale),
   currentLanguage: getActiveLanguage(state.locale).code
 });
+
 
 export default connect(mapStateToProps)(AppBar);
 
