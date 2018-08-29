@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
-import Button from 'material-ui/Button';
-import { MenuItem, MenuList } from 'material-ui/Menu';
-import Grow from 'material-ui/transitions/Grow';
-import Paper from 'material-ui/Paper';
-import { withStyles } from 'material-ui/styles';
-import { Manager, Target, Popper } from 'react-popper';
-import ClickAwayListener from 'material-ui/utils/ClickAwayListener';
+import Button from '@material-ui/core/Button';
+import ClickAwayListener from '@material-ui/core/ClickAwayListener';
+import Grow from '@material-ui/core/Grow';
+import Paper from '@material-ui/core/Paper';
+import Popper from '@material-ui/core/Popper';
+import MenuItem from '@material-ui/core/MenuItem';
+import MenuList from '@material-ui/core/MenuList';
+import { withStyles } from '@material-ui/core/styles';
 
 const styles = theme => ({
   root: {
@@ -16,9 +16,6 @@ const styles = theme => ({
   paper: {
     marginRight: theme.spacing.unit * 2,
   },
-  popperClose: {
-    pointerEvents: 'none',
-  },
 });
 
 class MenuListComposition extends React.Component {
@@ -26,23 +23,16 @@ class MenuListComposition extends React.Component {
     open: false,
   };
 
-  componentWillUnmount() {
-    clearTimeout(this.timeout);
-  }
-
-  handleClick = () => {
-    this.setState({ open: !this.state.open });
+  handleToggle = () => {
+    this.setState(state => ({ open: !state.open }));
   };
 
-  handleClose = () => {
-    if (!this.state.open) {
+  handleClose = event => {
+    if (this.anchorEl.contains(event.target)) {
       return;
     }
 
-    // setTimeout to ensure a close event comes after a target click event
-    this.timeout = setTimeout(() => {
-      this.setState({ open: false });
-    });
+    this.setState({ open: false });
   };
 
   render() {
@@ -51,34 +41,44 @@ class MenuListComposition extends React.Component {
 
     return (
       <div className={classes.root}>
-        <Manager>
-          <Target>
-            <Button
-              aria-owns={open ? 'menu-list' : null}
-              aria-haspopup="true"
-              onClick={this.handleClick}
-            >
-              Toggle Menu
-            </Button>
-          </Target>
-          <Popper
-            placement="bottom-start"
-            eventsEnabled={open}
-            className={classNames({ [classes.popperClose]: !open })}
+        <Paper className={classes.paper}>
+          <MenuList>
+            <MenuItem>Profile</MenuItem>
+            <MenuItem>My account</MenuItem>
+            <MenuItem>Logout</MenuItem>
+          </MenuList>
+        </Paper>
+        <div>
+          <Button
+            buttonRef={node => {
+              this.anchorEl = node;
+            }}
+            aria-owns={open ? 'menu-list-grow' : null}
+            aria-haspopup="true"
+            onClick={this.handleToggle}
           >
-            <ClickAwayListener onClickAway={this.handleClose}>
-              <Grow in={open} id="menu-list" style={{ transformOrigin: '0 0 0' }}>
+            Toggle Menu Grow
+          </Button>
+          <Popper open={open} anchorEl={this.anchorEl} transition disablePortal>
+            {({ TransitionProps, placement }) => (
+              <Grow
+                {...TransitionProps}
+                id="menu-list-grow"
+                style={{ transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom' }}
+              >
                 <Paper>
-                  <MenuList role="menu">
-                    <MenuItem onClick={this.handleClose}>Profile</MenuItem>
-                    <MenuItem onClick={this.handleClose}>My account</MenuItem>
-                    <MenuItem onClick={this.handleClose}>Logout</MenuItem>
-                  </MenuList>
+                  <ClickAwayListener onClickAway={this.handleClose}>
+                    <MenuList>
+                      <MenuItem onClick={this.handleClose}>Profile</MenuItem>
+                      <MenuItem onClick={this.handleClose}>My account</MenuItem>
+                      <MenuItem onClick={this.handleClose}>Logout</MenuItem>
+                    </MenuList>
+                  </ClickAwayListener>
                 </Paper>
               </Grow>
-            </ClickAwayListener>
+            )}
           </Popper>
-        </Manager>
+        </div>
       </div>
     );
   }
@@ -89,4 +89,3 @@ MenuListComposition.propTypes = {
 };
 
 export default withStyles(styles)(MenuListComposition);
-

@@ -1,12 +1,13 @@
 import { combineReducers } from 'redux';
-import { localeReducer as locale } from 'react-localize-redux';
+import { localizeReducer } from 'react-localize-redux';
 
 import settings from './settings';
 
+
 const rootReducer = combineReducers({
-  locale,
+  localize: localizeReducer,
   settings,
 });
 
-export default rootReducer;
 
+export default rootReducer;

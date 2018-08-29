@@ -1,34 +1,34 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from 'material-ui/styles';
-import Card, { CardContent, CardMedia } from 'material-ui/Card';
-import IconButton from 'material-ui/IconButton';
-import Typography from 'material-ui/Typography';
-import SkipPreviousIcon from 'material-ui-icons/SkipPrevious';
-import PlayArrowIcon from 'material-ui-icons/PlayArrow';
-import SkipNextIcon from 'material-ui-icons/SkipNext';
+import { withStyles } from '@material-ui/core/styles';
+import Card, { CardContent, CardMedia } from '@material-ui/core/Card';
+import IconButton from '@material-ui/core/IconButton';
+import Typography from '@material-ui/core/Typography';
+import SkipPreviousIcon from '@material-ui/icons/SkipPrevious';
+import PlayArrowIcon from '@material-ui/icons/PlayArrow';
+import SkipNextIcon from '@material-ui/icons/SkipNext';
 
 import RadioButtons from '../RadioButtons/RadioButtons';
 
 const styles = theme => ({
   card: {
     display: 'flex',
-		flexDirection: 'column',
-	  alignItems: 'center',
-	  justifyContent: 'center',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   details: {
     display: 'flex',
     flexDirection: 'row',
-	  alignItems: 'center',
-	  justifyContent: 'center',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   content: {
     flex: '1 0 auto',
   },
   cover: {
-		width: 500,
-		height: 200,
+    width: 500,
+    height: 200,
   },
   controls: {
     display: 'flex',
@@ -45,18 +45,18 @@ function MediaControlCard(props) {
     <div>
       <Card className={classes.card}>
         <div className={classes.details}>
-					<IconButton aria-label="Previous">
-						{theme.direction === 'rtl' ? <SkipNextIcon /> : <SkipPreviousIcon />}
-					</IconButton>
-					<CardMedia
-						className={classes.cover}
-						image="/static/images/cards/live-from-space.jpg"
-					/>
-					<IconButton aria-label="Next">
-						{theme.direction === 'rtl' ? <SkipPreviousIcon /> : <SkipNextIcon />}
-					</IconButton>
+          <IconButton aria-label="Previous">
+            {theme.direction === 'rtl' ? <SkipNextIcon /> : <SkipPreviousIcon />}
+          </IconButton>
+          <CardMedia
+            className={classes.cover}
+            image="/static/images/cards/live-from-space.jpg"
+          />
+          <IconButton aria-label="Next">
+            {theme.direction === 'rtl' ? <SkipPreviousIcon /> : <SkipNextIcon />}
+          </IconButton>
         </div>
-				<RadioButtons />
+        <RadioButtons />
       </Card>
     </div>
   );

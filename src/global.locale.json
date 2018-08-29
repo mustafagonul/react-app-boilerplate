@@ -1,16 +1,16 @@
 {
-	"TURKISH": [
-		"TURKISH",
-		"TÜRKÇE"
-	],
-	"ENGLISH": [
-		"ENGLISH",
-		"İNGİLİZCE"
-	],
+  "TURKISH": [
+    "TURKISH",
+    "TÜRKÇE"
+  ],
+  "ENGLISH": [
+    "ENGLISH",
+    "İNGİLİZCE"
+  ],
   "Home": [
     "Home",
     "Ana Sayfa"
-	],
+  ],
   "Info": [
     "Info",
     "Bilgi"

@@ -11,7 +11,7 @@ export function fooRequest({ foo }) {
     localStorage.setItem('foo', foo);
 
     dispatch(fooComplete({
-			foo
+      foo
     }));
   }
 }

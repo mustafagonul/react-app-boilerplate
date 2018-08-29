@@ -1,7 +1,6 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
-import { initialize, addTranslation } from 'react-localize-redux';
 import { fromJS } from 'immutable';
 
 import configureStore from './store/configureStore';
@@ -13,25 +12,16 @@ import './style.css';
 
 const foo = localStorage.getItem('foo');
 
+
 const store = configureStore({
-	settings: fromJS({
-		foo
-	})
+  settings: fromJS({
+    foo
+  })
 });
 
-const languages = [
-  { name: 'English', code: 'en' },
-  { name: 'Turkish', code: 'tr' },
-];
-const json = require('./global.locale.json');
-
-store.dispatch(initialize(languages, { defaultLanguage: 'en' }));
-store.dispatch(addTranslation(json));
-
 render(
-	<Provider store={store}>
-		<App />
-	</Provider>,
-	document.getElementById('root')
+  <Provider store={store}>  
+    <App store={store}/>
+  </Provider>,
+  document.getElementById('root')
 );
-
