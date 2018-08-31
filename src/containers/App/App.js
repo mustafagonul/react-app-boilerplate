@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router,  Route} from 'react-router-dom';
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import CssBaseline from '@material-ui/core/CssBaseline';
 
 
 import AppBar from '../../containers/AppBar/AppBar';
@@ -11,10 +13,18 @@ import About from '../About/About';
 import './App.css';
 
 
+const theme = createMuiTheme({
+  palette: {
+    type: 'dark', // Switching the dark mode on is a single property value change.
+  },
+});
+
+
 class App extends Component {
   render() {
-
     return (
+      <MuiThemeProvider theme={theme}>
+      <CssBaseline />
       <Router>
         <div>
           <AppBar />
@@ -23,6 +33,7 @@ class App extends Component {
           <Route path="/about" component={About}/>
         </div>
       </Router>
+      </MuiThemeProvider>
     );
   }
 }

@@ -1,12 +1,17 @@
 import React from 'react';
 
+import OnePaper from '../../components/OnePaper/OnePaper';
+
 
 const Home = () => (
-  <div>
-    <h2>{ 'Home' }</h2>
-  </div>
+  <OnePaper>
+    <h2>
+      Home
+    </h2>
+  </OnePaper>
 )
 
 
 export default Home;
+
 
